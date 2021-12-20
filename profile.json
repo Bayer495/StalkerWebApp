@@ -1,0 +1,41 @@
+{
+    "Id": 1,
+    "Name": "Верзила",
+    "Cash": 3000,
+    "CurrentHP": 50,
+    "MaxHP": 100,
+    "Reputation": 0,
+    "ApBonus": 2,
+    "ArmorBonus": 1,
+    "MedicBonus": 0,
+    "MapLocationBonus": 0,
+    "MaxGrenades": 5,
+    "MaxStimulants": 5,
+    "Inventory": {
+        "Head": {
+            "Name": "Head",
+            "Price": 100,
+            "Type": "HEAD",
+            "DefenceValue": 2
+        },
+        "Chest": {
+            "Name": "Chest",
+            "Price": 100,
+            "Type": "CHEST",
+            "DefenceValue": 2
+        },
+        "Weapon": {
+            "AttackPoints": {
+                "Dice": 2,
+                "Bonus": 1
+            },
+            "Mods": [
+                {
+                    "Name": "Mod1",
+                    "Price": 100,
+                    "Type": "MOD1"
+                }
+            ]
+        }
+    }
+}

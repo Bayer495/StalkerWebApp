@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+    <style>
+        button{
+            width: 100px;
+            height:30px;
+            border-radius: 4px;
+            margin:50px;
+        }
+        .on{
+            color:#666;
+            background-color: #ccc;
+        }
+        .off{
+            color:#888;
+            background-color: white;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+       
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        class ClickButton extends React.Component {
+              
+           constructor(props) {
+               super(props);
+               this.state = {class: "off", label: "Вход"};                  
+               this.press = this.press.bind(this);                  
+           }
+
+           press(){
+               var className = (this.state.class==="off")?"on":"off";
+               this.setState({class: className});       
+               
+               var profile = JSON.parse("{ \"Id\": 1, \"Name\": \"Верзила\", \"Cash\": 3000, \"CurrentHP\": 50, \"MaxHP\": 100, \"Reputation\": 0, \"ApBonus\": 2, \"ArmorBonus\": 1, \"MedicBonus\": 0, \"MapLocationBonus\": 0, \"MaxGrenades\": 5, \"MaxStimulants\": 5, \"Head\": 2, \"Chest\": 2, \"Inventory\": { \"Head\": { \"Name\": \"Head\", \"Price\": 100, \"Type\": \"HEAD\", \"DefenceValue\": 2 }, \"Chest\": { \"Name\": \"Chest\", \"Price\": 100, \"Type\": \"CHEST\", \"DefenceValue\": 2 }, \"Weapon\": { \"AttackPoints\": { \"Dice\": 2, \"Bonus\": 1 }, \"Mods\": [ { \"Name\": \"Mod1\", \"Price\": 100, \"Type\": \"MOD1\" } ] } } }");
+               var def = profile.Inventory.Head.DefenceValue + profile.Inventory.Chest.DefenceValue;
+               ReactDOM.render(
+              <ProfileDisplay name={profile.Name} 
+              hp={profile.CurrentHP} 
+              def={def} />,
+              document.getElementById("app")
+          )    
+           }
+           
+           render() {
+               console.log("render()");
+               return <button onClick={this.press} className={this.state.class}>{this.state.label}</button>;
+           }
+       }
+
+       class ProfileDisplay extends React.Component {
+        constructor(props) {
+               super(props);               
+               this.press = this.press.bind(this);     
+               this.exit = this.exit.bind(this);
+           }
+
+        press(){
+            alert("ProfileDisplay press");
+            console.log("press()");
+        }
+
+        exit()
+        {
+            ReactDOM.render(
+           <ClickButton />,
+           document.getElementById("app")
+       )
+        }
+
+            render() {
+              return <div>
+                <input type="button" value="Выход" onClick={this.exit}/>
+                          <p>Имя: {this.props.name}</p>
+                          <p>HP: {this.props.hp}</p>
+                          <p>Защита: {this.props.def}</p>
+                          <p>Атака: {this.props.ap}</p>
+                          <p>Деньги: {this.props.cash} <input type="button" value="Добавить" onClick={this.press}/></p>
+                          <p>Репутация: {this.props.reputation}</p>
+                          <p>Шагов по зоне: {this.props.step}</p>
+                          <p>Бонус в локации: {this.props.location_step}</p>
+                          <p>Уклонение: {this.props.dodge}</p>
+                          <p>Смывка: {this.props.steals}</p>
+                          <p>Аптечки: {this.props.medicaments}</p>
+                          <p>Стимуляторы: {this.props.stimulators}</p>
+                          <p>Гранаты: {this.props.granades}</p>
+                      </div>;
+            }
+          }
+
+       ReactDOM.render(
+           <ClickButton />,
+           document.getElementById("app")
+       )
+    </script>
+</body>
+</html>
